@@ -2,7 +2,7 @@ import React from 'react';
 import {useState} from 'react';
 import APIFetcher from './SubComponent/Fetch';
 
-function Weather() {
+function Weather({myAPI}) {
 
     const [latt, setLatt] = useState('');
     const [long, setLong] = useState('');
@@ -10,16 +10,13 @@ function Weather() {
     const [APIURL, setAPIURL] = useState('');
     const [trigger, setTrigger] = useState(0);
     
-    const myAPI = 'ff4e9c3e80223a1f73afefe4821b3f44';
-
-    const regExpression = /^(\+|-)?[0-9]{1,2}\.[0-9]{4,9}$/;
-
+    const regExpression = /^(\+|-)?[0-9]{1,3}\.[0-9]{4,9}$/;
 
     function CallMe() {
 
     if (!regExpression.test(latt) || !regExpression.test(long)) {
 
-      setError('Enter latitude and longitude in DD Cordinates format [(2digit dot 4decimal) Like: 00.0000]');
+      setError('Enter latitude and longitude in DD Cordinates format (1-3digit dot 4-9decimal)');
       return;
 
     } else {
@@ -29,7 +26,6 @@ function Weather() {
         setTrigger(prev => prev + 1);
     }
     }
-
 
         const { APIdata, loading, errorAPI } = APIFetcher(APIURL, trigger);
 
@@ -41,21 +37,17 @@ function Weather() {
         return response.json();
       })
 
-
       .then(function (data) {
         setWeatherData(data);
       })
-
 
       .catch(function (err) {
         setError(err.message);
       })
 
-
       .finally(function () {
         setLoading(false);
       })
-
       ;
   
 */
@@ -94,13 +86,13 @@ function Weather() {
 
       </div>
 
-      {loading && <p>Loading weather data...</p>}
+      {loading && <p>Loading WeatherAPI Data...</p>}
 
-        {error ? (
-        <p className="error">{error}</p>
-        ) : errorAPI ? (
-        <p className="error">{errorAPI}</p>
-        ) : null}
+      {error ? (
+      <p className="error">{error}</p>
+      ) : errorAPI ? (
+      <p className="error">{errorAPI}</p>
+      ) : null}
 
       {APIdata && (
 

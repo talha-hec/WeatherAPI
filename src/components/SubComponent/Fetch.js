@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 function APIFetcher (APIURL, trigger) {
 
-    const [APIdata, setData] = useState(null);
+    const [APIdata, setAPIData] = useState(null);
     const [errorAPI, setErrorAPI] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -18,13 +18,13 @@ function APIFetcher (APIURL, trigger) {
 
       .then(function (response) {
         if (!response.ok) {
-          throw new Error('Failed to fetch data');
+          throw new Error("Failed to fetch data");
         }
         return response.json();
       })
 
       .then(function (data) {
-        setData(data);
+        setAPIData(data);
       })
 
       .catch(function (err) {
@@ -39,7 +39,9 @@ function APIFetcher (APIURL, trigger) {
 
   }, [APIURL, trigger]);
 
+  
   return { APIdata, loading, errorAPI };
+  
 }
 
 export default APIFetcher;

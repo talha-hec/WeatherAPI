@@ -4,8 +4,10 @@ import Weather from './components/weather API'
 
 function App(){
 
+    const secureAPIKey = process.env.REACT_APP_MYAPI;
+
     return(
-        <Weather />
+        <Weather myAPI = {secureAPIKey}/>
     );
 }
 
